@@ -10,16 +10,13 @@ var Storage = function() {
 Storage.prototype.add = function(name) {
   var item = {name: name, id: this.id};
   this.items.push(item);
-  console.log(this.items);
   this.id += 1;
-  console.log("id: "+this.id);
   return item;
 };
 
 Storage.prototype.remove = function(itemId) {
   var item = this.items[itemId];
   this.items.splice(itemId, 1);
-  console.log(this.items);
   return item;
 };
 
@@ -28,13 +25,10 @@ Storage.prototype.update = function(itemId, name) {
   // this.items to avoid full loop
   for (var i=0; i<this.items.length; i++) {
     if (this.items[i].id == itemId) {
-      console.log("item found, updating...");
       this.items[itemId].name = name;
-      console.log(this.items);
       return this.items[itemId];
     }
   }
-  console.log("item not found, adding new...");
   return this.add(name);
 };
 
@@ -82,3 +76,6 @@ app.put('/items/:item_id', jsonParser, function(req, res) {
 });
 
 app.listen(process.env.PORT || 8080);
+
+exports.app = app;
+exports.storage = storage;
