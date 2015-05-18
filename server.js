@@ -52,7 +52,7 @@ app.post('/items', jsonParser, function (req, res) {
   // if request does not include a body
   // send a 400 response
   // 400 == "Bad Request", malformed syntax
-  if (!req.body) {
+  if (!req.body.name) {
     return res.sendStatus(400);
   }
   
@@ -67,7 +67,7 @@ app.delete('/items/:item_id', jsonParser, function( req, res) {
 });
 
 app.put('/items/:item_id', jsonParser, function(req, res) {
-  if (!req.body) {
+  if (!req.body.name) {
     return res.sendStatus(400);
   }
   
